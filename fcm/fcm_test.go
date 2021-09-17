@@ -10,8 +10,8 @@ import (
 )
 
 import (
-	"github.com/google/cloud-print-connector/fcm"
-	"github.com/google/cloud-print-connector/notification"
+	"cloud-print-connector/fcm"
+	"cloud-print-connector/notification"
 )
 
 func TestFCM_ReceiveNotification(t *testing.T) {
@@ -19,7 +19,7 @@ func TestFCM_ReceiveNotification(t *testing.T) {
 	// test FCM server
 	handler := func(w http.ResponseWriter, r *http.Request) {
 		printerNotificationStr :=
-				`148
+			`148
 [[4,[{"from":"xyz","category":"js","collapse_key":"xyz","data":{"notification":"printerId","subtype":"xyz"},"message_id":"xyz","time_to_live":60}]]]`
 		fmt.Fprint(w, printerNotificationStr)
 	}

@@ -4,6 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
+//go:build linux || darwin || freebsd
 // +build linux darwin freebsd
 
 package cups
@@ -15,8 +16,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/google/cloud-print-connector/cdd"
-	"github.com/google/cloud-print-connector/lib"
+	"cloud-print-connector/cdd"
+	"cloud-print-connector/lib"
 )
 
 func TestTranslateTicket(t *testing.T) {
@@ -284,7 +285,7 @@ func TestTranslateTicket_RicohLockedPrint(t *testing.T) {
 	if err != nil {
 		t.Logf("did not expect error %s", err)
 		t.Fail()
-	}	
+	}
 	if !reflect.DeepEqual(o, expected) {
 		t.Logf("expected\n %+v\ngot\n %+v", expected, o)
 		t.Fail()

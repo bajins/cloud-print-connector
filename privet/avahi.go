@@ -4,6 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
+//go:build linux || freebsd
 // +build linux freebsd
 
 package privet
@@ -19,7 +20,7 @@ import (
 	"sync"
 	"unsafe"
 
-	"github.com/google/cloud-print-connector/log"
+	"cloud-print-connector/log"
 )
 
 var (

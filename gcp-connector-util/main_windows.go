@@ -4,6 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
+//go:build windows
 // +build windows
 
 package main
@@ -13,47 +14,47 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/google/cloud-print-connector/lib"
+	"cloud-print-connector/lib"
 	"github.com/urfave/cli"
 	"golang.org/x/sys/windows/svc"
 	"golang.org/x/sys/windows/svc/eventlog"
 	"golang.org/x/sys/windows/svc/mgr"
 )
 
-var windowsCommands = []*cli.Command{
-	&cli.Command{
-		Name:      "init",
-		Aliases:   []string{"i"},
-		Usage:     "Create a config file",
-		Action:    initConfigFile,
-		Flags:     commonInitFlags,
+var windowsCommands = []cli.Command{
+	cli.Command{
+		Name:    "init",
+		Aliases: []string{"i"},
+		Usage:   "Create a config file",
+		Action:  initConfigFile,
+		Flags:   commonInitFlags,
 	},
-	&cli.Command{
+	cli.Command{
 		Name:   "install-event-log",
 		Usage:  "Install registry entries for the event log",
 		Action: installEventLog,
 	},
-	&cli.Command{
+	cli.Command{
 		Name:   "remove-event-log",
 		Usage:  "Remove registry entries for the event log",
 		Action: removeEventLog,
 	},
-	&cli.Command{
+	cli.Command{
 		Name:   "create-service",
 		Usage:  "Create a service in the local service control manager",
 		Action: createService,
 	},
-	&cli.Command{
+	cli.Command{
 		Name:   "delete-service",
 		Usage:  "Delete an existing service in the local service control manager",
 		Action: deleteService,
 	},
-	&cli.Command{
+	cli.Command{
 		Name:   "start-service",
 		Usage:  "Start the service in the local service control manager",
 		Action: startService,
 	},
-	&cli.Command{
+	cli.Command{
 		Name:   "stop-service",
 		Usage:  "Stop the service in the local service control manager",
 		Action: stopService,

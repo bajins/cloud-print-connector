@@ -26,9 +26,9 @@ import (
 
 	"golang.org/x/oauth2"
 
-	"github.com/google/cloud-print-connector/cdd"
-	"github.com/google/cloud-print-connector/lib"
-	"github.com/google/cloud-print-connector/log"
+	"cloud-print-connector/cdd"
+	"cloud-print-connector/lib"
+	"cloud-print-connector/log"
 )
 
 const (
@@ -44,8 +44,8 @@ const (
 	AccessType      = "offline"
 
 	// Printer Notification channel constants.
-	FCP_CHANNEL     = "FCM_CHANNEL"
-	XMPP_CHANNEL    = "XMPP_CHANNEL"
+	FCP_CHANNEL  = "FCM_CHANNEL"
+	XMPP_CHANNEL = "XMPP_CHANNEL"
 )
 
 // GoogleCloudPrint is the interface between Go and the Google Cloud Print API.

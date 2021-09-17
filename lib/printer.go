@@ -12,7 +12,7 @@ import (
 	"reflect"
 	"regexp"
 
-	"github.com/google/cloud-print-connector/cdd"
+	"cloud-print-connector/cdd"
 )
 
 type PrinterState uint8
@@ -226,11 +226,11 @@ func diffPrinter(pn, pg *Printer) PrinterDiff {
 	}
 
 	if d.DefaultDisplayNameChanged || d.ManufacturerChanged || d.ModelChanged ||
-			d.GCPVersionChanged || d.SetupURLChanged || d.SupportURLChanged ||
-			d.UpdateURLChanged || d.ConnectorVersionChanged || d.StateChanged ||
-			d.DescriptionChanged || d.CapsHashChanged || d.TagsChanged ||
-			d.DuplexMapChanged || d.QuotaEnabledChanged || d.DailyQuotaChanged ||
-			d.NotificationChannelChanged {
+		d.GCPVersionChanged || d.SetupURLChanged || d.SupportURLChanged ||
+		d.UpdateURLChanged || d.ConnectorVersionChanged || d.StateChanged ||
+		d.DescriptionChanged || d.CapsHashChanged || d.TagsChanged ||
+		d.DuplexMapChanged || d.QuotaEnabledChanged || d.DailyQuotaChanged ||
+		d.NotificationChannelChanged {
 		return d
 	}
 

@@ -10,8 +10,8 @@ import (
 )
 
 import (
-	"github.com/google/cloud-print-connector/log"
-	"github.com/google/cloud-print-connector/notification"
+	"cloud-print-connector/log"
+	"cloud-print-connector/notification"
 )
 
 const (
@@ -30,7 +30,7 @@ type FCM struct {
 	notifications chan<- notification.PrinterNotification
 	dead          chan struct{}
 
-	quit chan struct{}
+	quit    chan struct{}
 	backoff backoff
 }
 
@@ -38,7 +38,7 @@ type FCMMessage []struct {
 	From        string `json:"from"`
 	Category    string `json:"category"`
 	CollapseKey string `json:"collapse_key"`
-	Data struct {
+	Data        struct {
 		Notification string `json:"notification"`
 		Subtype      string `json:"subtype"`
 	} `json:"data"`
@@ -102,14 +102,14 @@ func (f *FCM) ConnectToFcm(fcmNotifications chan<- notification.PrinterNotificat
 			for {
 				printerId, err := GetPrinterID(reader)
 				if len(printerId) > 0 {
-					pn := notification.PrinterNotification{printerId, notification.PrinterNewJobs}
+					pn := notification.PrinterNotification{GCPID: printerId, Type: notification.PrinterNewJobs}
 					fcmNotifications <- pn
 				}
 				if err != nil {
-						log.Info("DRAIN message received, client reconnecting.")
-						dead <- struct{}{}
-						break
-					}
+					log.Info("DRAIN message received, client reconnecting.")
+					dead <- struct{}{}
+					break
+				}
 			}
 		}()
 	}
@@ -120,7 +120,7 @@ func GetPrinterID(reader *bufio.Reader) (string, error) {
 	raw_input, err := reader.ReadBytes('\n')
 	if err == nil {
 		// Trim last \n char
-		raw_input = raw_input[:len(raw_input) - 1]
+		raw_input = raw_input[:len(raw_input)-1]
 		buffer_size, _ := strconv.Atoi(string(raw_input))
 		notification_buffer := make([]byte, buffer_size)
 		var sofar, sz int

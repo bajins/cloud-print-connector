@@ -4,6 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
+//go:build windows
 // +build windows
 
 package main
@@ -14,14 +15,14 @@ import (
 	"os"
 	"time"
 
-	"github.com/google/cloud-print-connector/fcm"
-	"github.com/google/cloud-print-connector/gcp"
-	"github.com/google/cloud-print-connector/lib"
-	"github.com/google/cloud-print-connector/log"
-	"github.com/google/cloud-print-connector/manager"
-	"github.com/google/cloud-print-connector/notification"
-	"github.com/google/cloud-print-connector/winspool"
-	"github.com/google/cloud-print-connector/xmpp"
+	"cloud-print-connector/fcm"
+	"cloud-print-connector/gcp"
+	"cloud-print-connector/lib"
+	"cloud-print-connector/log"
+	"cloud-print-connector/manager"
+	"cloud-print-connector/notification"
+	"cloud-print-connector/winspool"
+	"cloud-print-connector/xmpp"
 	"github.com/urfave/cli"
 	"golang.org/x/sys/windows/svc"
 	"golang.org/x/sys/windows/svc/debug"
@@ -36,7 +37,10 @@ func main() {
 		&lib.ConfigFilenameFlag,
 	}
 	app.Action = runService
-	app.Run(os.Args)
+	err := app.Run(os.Args)
+	if err != nil {
+		return
+	}
 }
 
 var (
@@ -56,7 +60,7 @@ type service struct {
 }
 
 func runService(context *cli.Context) error {
-	interactive, err := svc.IsAnInteractiveSession()
+	interactive, err := svc.IsWindowsService()
 	if err != nil {
 		return cli.NewExitError(fmt.Sprintf("Failed to detect interactive session: %s", err), 1)
 	}
@@ -230,7 +234,10 @@ func (service *service) Execute(args []string, r <-chan svc.ChangeRequest, s cha
 			// not see the new printer. Even if we miss it eventually the timed updates
 			// will pick it up.
 			time.AfterFunc(time.Second*5, func() {
-				pm.SyncPrinters(false)
+				err := pm.SyncPrinters(false)
+				if err != nil {
+					return
+				}
 			})
 
 		default:

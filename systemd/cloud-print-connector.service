@@ -6,7 +6,7 @@
 
 [Unit]
 Description=Google Cloud Print Connector
-Documentation="https://github.com/google/cloud-print-connector"
+Documentation="https://cloud-print-connector"
 After=cups.service avahi-daemon.service network-online.target
 Wants=cups.service avahi-daemon.service network-online.target
 

@@ -4,6 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
+//go:build windows
 // +build windows
 
 // The log package logs to the Windows Event Log, or stdout.
@@ -12,7 +13,7 @@ package log
 import (
 	"fmt"
 
-	"github.com/google/cloud-print-connector/lib"
+	"cloud-print-connector/lib"
 	"golang.org/x/sys/windows/svc/debug"
 	"golang.org/x/sys/windows/svc/eventlog"
 )

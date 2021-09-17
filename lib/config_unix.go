@@ -4,6 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
+//go:build linux || darwin || freebsd
 // +build linux darwin freebsd
 
 package lib
@@ -14,7 +15,6 @@ import (
 	"reflect"
 
 	"github.com/urfave/cli"
-	"launchpad.net/go-xdg/v0"
 )
 
 const (

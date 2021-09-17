@@ -4,6 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
+//go:build linux || darwin || freebsd
 // +build linux darwin freebsd
 
 package main
@@ -12,7 +13,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/google/cloud-print-connector/lib"
+	"cloud-print-connector/lib"
 	"github.com/urfave/cli"
 )
 
@@ -56,35 +57,35 @@ var unixInitFlags = []cli.Flag{
 		Usage: "Whether to use the full username (joe@example.com) in CUPS jobs",
 	},
 	&cli.BoolFlag{
-		Name:  "cups-ignore-raw-printers",
-		Usage: "Whether to ignore CUPS raw printers",
+		Name:        "cups-ignore-raw-printers",
+		Usage:       "Whether to ignore CUPS raw printers",
 		DefaultText: "1",
 	},
 	&cli.BoolFlag{
-		Name:  "cups-ignore-class-printers",
-		Usage: "Whether to ignore CUPS class printers",
+		Name:        "cups-ignore-class-printers",
+		Usage:       "Whether to ignore CUPS class printers",
 		DefaultText: "1",
 	},
 	&cli.BoolFlag{
-		Name:  "copy-printer-info-to-display-name",
-		Usage: "Whether to copy the CUPS printer's printer-info attribute to the GCP printer's defaultDisplayName",
+		Name:        "copy-printer-info-to-display-name",
+		Usage:       "Whether to copy the CUPS printer's printer-info attribute to the GCP printer's defaultDisplayName",
 		DefaultText: "1",
 	},
 }
 
 var unixCommands = []*cli.Command{
 	&cli.Command{
-		Name:      "init",
-		Aliases:   []string{"i"},
-		Usage:     "Creates a config file",
-		Action:    initConfigFile,
-		Flags:     append(commonInitFlags, unixInitFlags...),
+		Name:    "init",
+		Aliases: []string{"i"},
+		Usage:   "Creates a config file",
+		Action:  initConfigFile,
+		Flags:   append(commonInitFlags, unixInitFlags...),
 	},
 	&cli.Command{
-		Name:      "monitor",
+		Name:    "monitor",
 		Aliases: []string{"m"},
-		Usage:     "Read stats from a running connector",
-		Action:    monitorConnector,
+		Usage:   "Read stats from a running connector",
+		Action:  monitorConnector,
 		Flags: []cli.Flag{
 			&cli.DurationFlag{
 				Name:  "monitor-timeout",

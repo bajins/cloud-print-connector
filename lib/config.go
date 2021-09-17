@@ -21,7 +21,7 @@ const (
 	ConnectorName = "Google Cloud Print Connector"
 
 	// A website with user-friendly information.
-	ConnectorHomeURL = "https://github.com/google/cloud-print-connector"
+	ConnectorHomeURL = "https://cloud-print-connector"
 
 	GCPAPIVersion = "2.0"
 )
@@ -34,7 +34,7 @@ var (
 	}
 
 	// To be populated by something like:
-	// go install -ldflags "-X github.com/google/cloud-print-connector/lib.BuildDate=`date +%Y.%m.%d`"
+	// go install -ldflags "-X cloud-print-connector/lib.BuildDate=`date +%Y.%m.%d`"
 	BuildDate = "DEV"
 
 	ShortName = platformName + " Connector " + BuildDate + "-" + runtime.GOOS

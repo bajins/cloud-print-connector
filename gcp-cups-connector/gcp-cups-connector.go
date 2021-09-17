@@ -4,6 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
+//go:build linux || darwin || freebsd
 // +build linux darwin freebsd
 
 package main
@@ -18,17 +19,17 @@ import (
 	"syscall"
 	"time"
 
+	"cloud-print-connector/cups"
+	"cloud-print-connector/fcm"
+	"cloud-print-connector/gcp"
+	"cloud-print-connector/lib"
+	"cloud-print-connector/log"
+	"cloud-print-connector/manager"
+	"cloud-print-connector/monitor"
+	"cloud-print-connector/notification"
+	"cloud-print-connector/privet"
+	"cloud-print-connector/xmpp"
 	"github.com/coreos/go-systemd/journal"
-	"github.com/google/cloud-print-connector/cups"
-	"github.com/google/cloud-print-connector/fcm"
-	"github.com/google/cloud-print-connector/gcp"
-	"github.com/google/cloud-print-connector/lib"
-	"github.com/google/cloud-print-connector/log"
-	"github.com/google/cloud-print-connector/manager"
-	"github.com/google/cloud-print-connector/monitor"
-	"github.com/google/cloud-print-connector/notification"
-	"github.com/google/cloud-print-connector/privet"
-	"github.com/google/cloud-print-connector/xmpp"
 	"github.com/urfave/cli"
 )
 
