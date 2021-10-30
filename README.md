@@ -3,6 +3,8 @@
 **Note: After December 31, 2020, Google Cloud Print will no longer be supported. Learn more about
 your [migration options](https://support.google.com/chrome/?p=cloudprint).**
 
+* [https://developers.google.com/cloud-print/docs/overview](https://developers.google.com/cloud-print/docs/overview)
+
 ## Introduction
 
 Share printers from your Windows, Linux, FreeBSD or OS X computer with ChromeOS and Android devices, using the Cloud
